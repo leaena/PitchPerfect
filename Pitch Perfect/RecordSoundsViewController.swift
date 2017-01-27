@@ -49,7 +49,9 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let filePath = NSURL.fileURLWithPathComponents(pathArray)
         
         var session = AVAudioSession.sharedInstance()
-        session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
+        //session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
+        session.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: .DefaultToSpeaker)
+        // adding withOptions: .DefaultToSpeaker fixes your problem with the volume being too quiet.
         
         audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
         
